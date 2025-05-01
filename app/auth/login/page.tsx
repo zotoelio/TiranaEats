@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useRouter } from 'next/navigation';
 import { supabase } from "../../../lib/supabaseClient";
 import { useState } from "react";
 
@@ -10,6 +11,7 @@ export default function LoginPage() {
     const[password, setPassword] = useState('');
     const[role, setRole] = useState('user');
     const [error, setError] = useState('');
+    const router = useRouter();
 
     // Placeholder login handler — you'll connect this to Supabase later
     const handleLogin = async (e: React.FormEvent) => {
@@ -32,8 +34,12 @@ export default function LoginPage() {
         // Optional: check user role from metadata
         const userRole = data.user?.user_metadata?.role;
 
-        alert(`Login successful! Logged in as ${userRole}`);
-        // TODO: Redirect to dashboard or homepage
+        if (userRole === 'admin') {
+        router.push('/admin/dashboard');
+        } else {
+        router.push('/dashboard');
+        }
+
     };
 
     return (
@@ -95,8 +101,19 @@ export default function LoginPage() {
                 >
                     Log In
                 </button>
+
+                <div className="mt-4 text-center">
+                    <p className="text-sm">
+                        Don't have an account?{' '}
+                        <a
+                        href="/auth/signup"
+                        className="text-indigo-600 hover:underline font-medium"
+                        >
+                        Sign up
+                        </a>
+                    </p>
+                </div>
             </form>
         </div>
     );
-      
 }

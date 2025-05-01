@@ -31,7 +31,7 @@ export default function SignUpPage() {
             email,
             password,
             options: {
-            data: { role }, // 👈 store user role in metadata
+            data: { role }, //store user role in metadata
             }
         });
 
@@ -52,7 +52,7 @@ export default function SignUpPage() {
             >
                 <h2 className="text-2xl font-bold mb-6 text-center">Sign Up for TiranaEats</h2>
         
-                {/* Dropdown to select role (user or restaurant owner) */}
+                {/* Dropdown to select role (user or admin) */}
                 <div className="mb-4">
                 <label className="block mb-1 font-medium">Sign up as</label>
                 <select
@@ -61,7 +61,7 @@ export default function SignUpPage() {
                     className="w-full border border-gray-300 rounded px-3 py-2"
                 >
                     <option value="user">User</option>
-                    <option value="owner">Restaurant Owner</option>
+                    <option value="admin">Admin</option>
                 </select>
                 </div>
         
@@ -108,6 +108,19 @@ export default function SignUpPage() {
                 >
                 Sign Up
                 </button>
+
+                {/* Already have an account? */}
+                <div className="mt-4 text-center">
+                    <p className="text-sm">
+                        Already have an account?{' '}
+                        <a
+                        href="/auth/login"
+                        className="text-green-600 hover:underline font-medium"
+                        >
+                        Log in
+                        </a>
+                    </p>
+                </div>
             </form>
         </div>
     );
